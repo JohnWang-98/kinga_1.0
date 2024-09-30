@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "949391374306",
+    "project_id": "kinga-69369",
+    "storage_bucket": "kinga-69369.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949391374306:android:19e24285c8f4cf66792bbb",
+        "android_client_info": {
+          "package_name": "com.thinker.kinga"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAwzavl_5CQpAoPBACnnUnfTUhX72CamI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
