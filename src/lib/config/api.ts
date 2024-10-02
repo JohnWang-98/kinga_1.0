@@ -12,6 +12,7 @@ export const PROFILE = '/user/profile';
 
 // Notifications
 export const NOTIFICATIONS = '/user/notifications';
+export const CREATEBROADCAST = '/user/broadcast';
 export const BROADCAST = '/broadcast';
 export const READ = '/read';
 

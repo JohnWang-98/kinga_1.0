@@ -26,6 +26,7 @@ export default function Settings(props: ISettings) {
   const {} = SettingsLogic();
   const navigation = useNavigation(); // Initialize navigation hook
   const { state } = useContext(AuthContext);
+  const [fullName, setFullName] = useState('');
   const [notificationOptions, setNotificationOptions] =
     useState(PreferencesOptions);
 
@@ -54,6 +55,12 @@ export default function Settings(props: ISettings) {
     };
 
     updateOptions();
+    const getFullName = async () => {
+      const fullName = await getLocalData('full_name');
+      setFullName(fullName);
+    };
+
+    getFullName();
   }, [PreferencesOptions]);
 
   // const [isPushNotificationEnabled, setIsPushNotificationEnabled] =
@@ -110,10 +117,8 @@ export default function Settings(props: ISettings) {
             source={require('../../../../assets/images/avatar.png')}
           />
           <View className="items-center justify-center ">
-            {state.user ? (
-              <CustomText className="font-500 text-2xl">
-                {state?.user?.fullName}
-              </CustomText>
+            {fullName ? (
+              <CustomText className="font-500 text-2xl">{fullName}</CustomText>
             ) : (
               <CustomText className="font-500 text-2xl">Unknown</CustomText>
             )}

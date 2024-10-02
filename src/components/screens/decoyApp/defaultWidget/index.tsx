@@ -38,7 +38,6 @@ export default function DefaultWidget(props: IDefaultWidget) {
     CallManager();
 
   const [contact, setContact] = useState(null);
-
   // Use useFocusEffect to refresh the UI when the screen is focused
   useFocusEffect(
     useCallback(() => {
@@ -49,7 +48,6 @@ export default function DefaultWidget(props: IDefaultWidget) {
       };
 
       getContact();
-
       // Optionally, return a cleanup function
       return () => {
         console.log('Screen is unfocused');

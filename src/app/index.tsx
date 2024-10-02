@@ -12,13 +12,20 @@ import AuthScreen from './(getting-started)/auth';
 import TabsScreen from './(tabs)'; // The (tabs) section
 import { clearLocalData, getLocalData } from '@/lib/helpers/localStorage';
 import { AuthProvider, AuthContext } from '@/contexts/auth';
-import { StatusBar, ActivityIndicator } from 'react-native';
+import {
+  StatusBar,
+  ActivityIndicator,
+  PermissionsAndroid,
+  Platform,
+  Alert,
+} from 'react-native';
 import DefaultSafeAreaView from '@/components/atoms/defaultSaveAreaView/DefaultSafeAreaView';
 import Toast from 'react-native-toast-message';
 import setupCallKeep from '@/lib/helpers/callKeepSetup';
 import CallManager from '@/lib/helpers/callManager';
 import LocationManager from '@/lib/helpers/geoLocation';
 import { notificationService } from '@/lib/services/fcm';
+import requestNotificationPermission from '@/lib/helpers/notificationSetup';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,7 +70,7 @@ const AppNavigation = () => {
 
   useEffect(() => {
     setupCallKeep();
-
+    requestNotificationPermission();
     registerCallKeepEventListeners();
     requestLocationPermission();
 
@@ -92,7 +99,7 @@ const AppNavigation = () => {
 
   const initialRouteName = isFirstLaunch
     ? 'Onboarding'
-    : state.isAuthenticated
+    : true
     ? 'TabsHome'
     : 'Auth';
 

@@ -6,6 +6,7 @@ import {
   saveContactsRequest,
 } from '@/lib/services/contacts';
 import Toast from 'react-native-toast-message';
+import { getLocalData, saveLocalData } from '@/lib/helpers/localStorage';
 
 export default function SelectContactsLogic() {
   // const {selectedOptions, toggleSelection} = useSelectedOptionsStore();
@@ -29,10 +30,38 @@ export default function SelectContactsLogic() {
     setIsLoading(true);
 
     try {
-      const res = await saveContactsRequest(selectedContacts);
+      // Get existing contacts from AsyncStorage
+      const existingContacts = await getLocalData('savedContacts');
+
+      let mergedContacts = selectedContacts;
+
+      // If there are existing contacts, merge them with the new contacts
+      if (existingContacts !== null) {
+        const parsedExistingContacts = JSON.parse(existingContacts);
+        // Merge new contacts with existing ones (removing duplicates if needed)
+        mergedContacts = [
+          ...parsedExistingContacts,
+          ...selectedContacts,
+        ].filter(
+          (value, index, self) =>
+            index ===
+            self.findIndex(
+              contact => contact.phoneNumber === value.phoneNumber,
+            ),
+        );
+      }
+
+      // Save merged contacts to AsyncStorage
+      await saveLocalData('savedContacts', JSON.stringify(mergedContacts));
+      // console.log('mergedContacts', mergedContacts);
       setIsLoading(false);
-    } catch (err) {}
-    // Great, now save to the server
+
+      // Optionally log a success message
+      console.log('Contacts merged and saved to AsyncStorage successfully');
+    } catch (err) {
+      setIsLoading(false);
+      console.error('Error saving contacts:', err);
+    }
   };
 
   const getUserContacts = async () => {

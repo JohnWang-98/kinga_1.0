@@ -1,5 +1,10 @@
 import { sendRequest, HttpMethod } from '../helpers/requestHandler'; // Import sendRequest and HttpMethod from requestHandler module
-import { NOTIFICATIONS, BROADCAST, READ } from '@/lib/config/api';
+import {
+  NOTIFICATIONS,
+  BROADCAST,
+  READ,
+  CREATEBROADCAST,
+} from '@/lib/config/api';
 
 export const broadcastLocationRequest = (message, latitude, longitude) => {
   return sendRequest(`${NOTIFICATIONS}${BROADCAST}`, HttpMethod.POST, {
@@ -33,4 +38,11 @@ export const deleteNotificationByIdRequest = notificationId => {
 
 export const deleteAllNotificationsRequest = () => {
   return sendRequest(`${NOTIFICATIONS}`, HttpMethod.DELETE);
+};
+
+export const createBroadcastRequest = (phoneNumber, token) => {
+  return sendRequest(`${CREATEBROADCAST}`, HttpMethod.PUT, {
+    phoneNumber,
+    token,
+  });
 };

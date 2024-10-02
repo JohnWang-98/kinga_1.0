@@ -81,7 +81,11 @@ export default function AccountForm() {
               icon={<PhoneIcon />}
               placeholder="Phone No."
               value={values.phone_number}
-              onChangeText={handleChange('phone_number')}
+              keyboardType="numeric" // Opens numeric keyboard
+              maxLength={14} // Limits the input to 14 characters
+              onChangeText={text =>
+                handleChange('phone_number')(text.replace(/\D/g, ''))
+              } // Replace non-numeric characters
               error={touched.phone_number && errors.phone_number}
               onBlur={() => setFieldTouched('phone_number')}
               touch={touched.phone_number}
@@ -97,7 +101,7 @@ export default function AccountForm() {
             </View>
             <PrimaryButton
               label="Save"
-              isLoading={isLoading}
+              isLoading={false}
               onPress={() => handleSubmit()}
             />
           </View>

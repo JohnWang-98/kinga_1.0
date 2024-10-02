@@ -11,7 +11,10 @@ const options = {
     alertDescription: 'This app needs access to your phone accounts',
     cancelButton: 'Cancel',
     okButton: 'OK',
-    additionalPermissions: [PermissionsAndroid.PERMISSIONS.READ_CONTACTS],
+    additionalPermissions: [
+      PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS, // Add more permissions here
+    ],
   },
 };
 

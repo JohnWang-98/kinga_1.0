@@ -1,9 +1,9 @@
-import { View } from "react-native";
-import ICustomizeText from "./customizeText.interface";
-import CustomizeTextLogic from "./customizeText.logic";
-import { Formik } from "formik";
-import CreateProfileButton from "@/components/atoms/buttons/createProfile";
-import CustomizeTextInputField from "@/components/atoms/input/customizeText";
+import { View } from 'react-native';
+import ICustomizeText from './customizeText.interface';
+import CustomizeTextLogic from './customizeText.logic';
+import { Formik } from 'formik';
+import CreateProfileButton from '@/components/atoms/buttons/createProfile';
+import CustomizeTextInputField from '@/components/atoms/input/customizeText';
 
 export default function CustomizeTextForm(props: ICustomizeText) {
   const {} = props;
@@ -15,8 +15,7 @@ export default function CustomizeTextForm(props: ICustomizeText) {
       <Formik
         validationSchema={schema}
         initialValues={initialValues}
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         {({
           errors,
           values,
@@ -29,9 +28,9 @@ export default function CustomizeTextForm(props: ICustomizeText) {
             <CustomizeTextInputField
               placeholder="Type here"
               value={values.display_name}
-              onChangeText={handleChange("display_name")}
+              onChangeText={handleChange('display_name')}
               error={touched.display_name && errors.display_name}
-              onBlur={() => setFieldTouched("display_name")}
+              onBlur={() => setFieldTouched('display_name')}
               touch={touched.display_name}
             />
             <CreateProfileButton
