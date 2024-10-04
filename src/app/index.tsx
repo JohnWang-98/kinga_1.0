@@ -53,7 +53,7 @@ const AppNavigation = () => {
     };
 
     // Initialize the notification service to handle notifications
-    notificationService.configure();
+    // notificationService.configure();
 
     // Request notification permission (for iOS)
     messaging()

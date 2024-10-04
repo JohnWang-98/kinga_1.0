@@ -30,30 +30,30 @@ export default function SelectContactsLogic() {
     setIsLoading(true);
 
     try {
-      // Get existing contacts from AsyncStorage
-      const existingContacts = await getLocalData('savedContacts');
+      // // Get existing contacts from AsyncStorage
+      // const existingContacts = await getLocalData('savedContacts');
 
-      let mergedContacts = selectedContacts;
+      // let mergedContacts = selectedContacts;
 
-      // If there are existing contacts, merge them with the new contacts
-      if (existingContacts !== null) {
-        const parsedExistingContacts = JSON.parse(existingContacts);
-        // Merge new contacts with existing ones (removing duplicates if needed)
-        mergedContacts = [
-          ...parsedExistingContacts,
-          ...selectedContacts,
-        ].filter(
-          (value, index, self) =>
-            index ===
-            self.findIndex(
-              contact => contact.phoneNumber === value.phoneNumber,
-            ),
-        );
-      }
+      // // If there are existing contacts, merge them with the new contacts
+      // if (existingContacts !== null) {
+      //   const parsedExistingContacts = JSON.parse(existingContacts);
+      //   // Merge new contacts with existing ones (removing duplicates if needed)
+      //   mergedContacts = [
+      //     ...parsedExistingContacts,
+      //     ...selectedContacts,
+      //   ].filter(
+      //     (value, index, self) =>
+      //       index ===
+      //       self.findIndex(
+      //         contact => contact.phoneNumber === value.phoneNumber,
+      //       ),
+      //   );
+      // }
 
       // Save merged contacts to AsyncStorage
-      await saveLocalData('savedContacts', JSON.stringify(mergedContacts));
-      // console.log('mergedContacts', mergedContacts);
+      await saveLocalData('savedContacts', JSON.stringify(selectedContacts));
+      console.log('savedContacts', selectedContacts);
       setIsLoading(false);
 
       // Optionally log a success message
@@ -66,26 +66,29 @@ export default function SelectContactsLogic() {
 
   const getUserContacts = async () => {
     setIsLoading(true);
-    try {
-      fetchContactsRequest()
-        .then(res => {
-          setIsLoading(false);
-          if (res.success) {
-            console.log('Contacts fetched successfully');
-            console.log(res.data.data);
-            setServerContacts(res.data.data);
-          } else {
-            console.error('Failed to fetch contacts');
-          }
-        })
-        .catch(error => {
-          setIsLoading(false);
-          console.error('Error fetching contacts:', error);
-        });
-    } catch (error) {
-      setIsLoading(false);
-      console.error('Error fetching contacts:', error);
-    }
+    // try {
+    //   fetchContactsRequest()
+    //     .then(res => {
+    //       setIsLoading(false);
+    //       if (res.success) {
+    //         console.log('Contacts fetched successfully');
+    //         console.log(res.data.data);
+    //         setServerContacts(res.data.data);
+    //       } else {
+    //         console.error('Failed to fetch contacts');
+    //       }
+    //     })
+    //     .catch(error => {
+    //       setIsLoading(false);
+    //       console.error('Error fetching contacts:', error);
+    //     });
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   console.error('Error fetching contacts:', error);
+    // }
+    const localSavedContacts = await getLocalData('savedContacts');
+    setServerContacts(JSON.parse(localSavedContacts));
+    setIsLoading(false);
   };
 
   useEffect(() => {

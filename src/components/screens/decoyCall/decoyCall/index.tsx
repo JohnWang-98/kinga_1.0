@@ -102,7 +102,7 @@ export default function DecoyCall(props: IDecoyCall) {
 
             <Options
               options={decoyCallOptions}
-              recordTime={String(elapsedTime)}
+              recordTime={elapsedTime ? String(elapsedTime) : '00:00'}
             />
           </View>
         </Frame>
