@@ -1,5 +1,5 @@
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation from React Navigation
-import { useState } from 'react';
+import {useNavigation} from '@react-navigation/native'; // Import useNavigation from React Navigation
+import {useState} from 'react';
 
 export default function AlertLogic() {
   const [visible, setVisible] = useState(false);
@@ -7,7 +7,7 @@ export default function AlertLogic() {
 
   const handleLogout = () => {
     setVisible(false);
-    navigation.navigate('TabsHome');
+    navigation.navigate('Auth');
   };
 
   return {

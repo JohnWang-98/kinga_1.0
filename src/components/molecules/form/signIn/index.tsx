@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Formik } from 'formik';
 import SignInLogic from './signIn.logic';
 import LockIcon from '@/assets/icons/lock';
@@ -7,8 +8,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  KeyboardAvoidingView,
-  ScrollView,
+  Platform,
 } from 'react-native';
 import PrimaryButton from '@/components/atoms/buttons/primary';
 import CheckboxInputField from '@/components/atoms/input/checkbox';
@@ -16,10 +16,45 @@ import TextInputField from '@/components/atoms/input/textInputField';
 import IconButton from '@/components/atoms/buttons/icon';
 import GoogleIcon from '@/assets/icons/google';
 import AppleIcon from '@/assets/icons/apple';
+import { googleSignInRequest, appleSignInRequest } from '@/lib/services/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { appleAuth } from '@invertase/react-native-apple-authentication'; // For Apple Sign-in (optional if not used)
 
 export default function SignInForm() {
   const { isLoading, SignInSchema, handleSubmit, initialValues } =
     SignInLogic();
+
+  // Ensure Google and Apple Sign-in are configured
+  useEffect(() => {
+    // Configure Google Sign-In
+    GoogleSignin.configure({
+  webClientId: 'YOUR_WEB_CLIENT_ID', // Client ID for web sign-in
+  iosClientId: 'YOUR_IOS_CLIENT_ID', // Optional, if using iOS
+  offlineAccess: true, // If you need server-side access, set this to true
+  forceCodeForRefreshToken: true, // Enables refresh token flow
+});
+
+    // (Optional) Apple Sign-In can be initialized here if needed
+    if (Platform.OS === 'ios') {
+      // Example configuration for Apple if additional setup is needed
+    }
+  }, []);
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignInRequest(); // Call your googleSignInRequest method
+    } catch (error) {
+      console.error('Google Sign-In failed:', error);
+    }
+  };
+
+  const handleAppleSignIn = async () => {
+    try {
+      await appleSignInRequest(); // Call your appleSignInRequest method
+    } catch (error) {
+      console.error('Apple Sign-In failed:', error);
+    }
+  };
 
   return (
     <View>
@@ -101,8 +136,16 @@ export default function SignInForm() {
 
       {/* Social Login Buttons */}
       <View style={styles.socialButtons}>
-        <IconButton icon={<GoogleIcon />} label="Google" />
-        <IconButton icon={<AppleIcon />} label="Apple" />
+        <IconButton
+          icon={<GoogleIcon />}
+          label="Google"
+          onPress={handleGoogleSignIn} // Use the handleGoogleSignIn function
+        />
+        <IconButton
+          icon={<AppleIcon />}
+          label="Apple"
+          onPress={handleAppleSignIn} // Use the handleAppleSignIn function
+        />
       </View>
     </View>
   );

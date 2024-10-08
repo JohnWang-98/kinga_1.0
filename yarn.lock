@@ -1792,6 +1792,11 @@
   "resolved" "https://registry.npmjs.org/@inquirer/figures/-/figures-1.0.6.tgz"
   "version" "1.0.6"
 
+"@invertase/react-native-apple-authentication@^2.4.0":
+  "integrity" "sha512-H29XdL/4JmMMA/b7CCEHpSKvyg3LdCJKMydE7ont01IAnDIW//uPuRMdL2RkxJKJtw449c/PY2K9ijWLxQAMIQ=="
+  "resolved" "https://registry.npmjs.org/@invertase/react-native-apple-authentication/-/react-native-apple-authentication-2.4.0.tgz"
+  "version" "2.4.0"
+
 "@isaacs/cliui@^8.0.2":
   "integrity" "sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA=="
   "resolved" "https://registry.npmjs.org/@isaacs/cliui/-/cliui-8.0.2.tgz"
@@ -2285,6 +2290,11 @@
   "integrity" "sha512-S3M9zHJ3zKRH6PuxxjOrV9i0uRO3S5rGYaY3s64BTh4iLEG46UDgJ5uA+WsY+9IsJtSpN4HYDcvnwoxasiEUfw=="
   "resolved" "https://registry.npmjs.org/@react-native-firebase/messaging/-/messaging-20.5.0.tgz"
   "version" "20.5.0"
+
+"@react-native-google-signin/google-signin@^13.1.0":
+  "integrity" "sha512-C2/sqb0/s0c+Dwc/mykASZsRuHxGqn7SFrCxCY9D8p8IOQO05haInhCc7lzraJshRixGva5c/4usQZ71HMYSEQ=="
+  "resolved" "https://registry.npmjs.org/@react-native-google-signin/google-signin/-/google-signin-13.1.0.tgz"
+  "version" "13.1.0"
 
 "@react-native/assets-registry@0.75.3":
   "version" "0.75.3"
@@ -4757,7 +4767,7 @@
   dependencies:
     "invariant" "^2.2.4"
 
-"expo@*", "expo@>=47.0.0":
+"expo@*", "expo@>=47.0.0", "expo@>=50.0.0":
   "integrity" "sha512-sSYor9C8oAmHcYfW50gxdLEug8xVO3+cE9eX49caiWj6Xp9hkYvDNw/PxLY/mm84DYq79FAbOWj6KAOYChO4Sw=="
   "resolved" "https://registry.npmjs.org/expo/-/expo-51.0.35.tgz"
   "version" "51.0.35"
@@ -8047,7 +8057,7 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-dom@^18.0.0":
+"react-dom@*", "react-dom@^18.0.0":
   "integrity" "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   "version" "18.3.1"

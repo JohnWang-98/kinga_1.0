@@ -65,7 +65,7 @@ export default function OptionsLogic({ options }) {
   const onConfirmLogout = () => {
     setAlertVisible(false);
     signOut();
-    navigation.replace('TabsHome');
+    navigation.replace('Auth');
   };
 
   return {

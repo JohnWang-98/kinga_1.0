@@ -16,7 +16,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import LocationManager from '@/lib/helpers/geoLocation';
 import { useState } from 'react';
 import { broadcastLocationRequest } from '@/lib/services/locationBroadcast';
-import axios from 'axios';
 
 export default function DefaultFloatingWidget(props: IDefaultFloatingWidget) {
   const {} = props;
@@ -27,67 +26,10 @@ export default function DefaultFloatingWidget(props: IDefaultFloatingWidget) {
   const { scheduleIncomingCall, checkRecordFileExists, call911 } =
     CallManager();
 
-  const getSavedPhoneNumbers = async () => {
-    try {
-      // Get the saved contacts from AsyncStorage
-      const savedContacts = await getLocalData('savedContacts');
-      // console.log('savedContacts:', savedContacts);
-      // Check if savedContacts is not null
-      if (savedContacts !== null) {
-        // Parse the saved contacts and map to extract phone numbers
-        const contactsArray = JSON.parse(savedContacts);
-        const phoneNumbers = contactsArray.map(contact =>
-          contact.phone.replace(/\D/g, ''),
-        );
-
-        console.log('Saved phone numbers:', phoneNumbers);
-        return phoneNumbers;
-      } else {
-        console.log('No saved contacts found');
-        return [];
-      }
-    } catch (error) {
-      console.error('Error retrieving saved phone numbers:', error);
-      return [];
-    }
-  };
-  const broadcastLocationRequest = async (
-    message,
-    latitude,
-    longitude,
-    phoneNumbers,
-    fullName,
-    fcmToken,
-  ) => {
-    try {
-      const response = await axios.post(
-        `${API_URL}/user/notifications/sendBroadcast`,
-        {
-          message,
-          latitude,
-          longitude,
-          phoneNumbers,
-          fullName,
-          fcmToken, // Send an array of phone numbers
-        },
-      );
-
-      return response.data; // Return the response data to handle success/failure
-    } catch (error) {
-      console.error(
-        'Error broadcasting location:',
-        error.response ? error.response.data : error.message,
-      );
-      return { success: false }; // Return failure if an error occurs
-    }
-  };
   const handleLocationBroadcast = async () => {
     setIsGettingLocation(true);
     const message = await getLocalData('message');
-    const phoneNumber = await getLocalData('phoneNumber');
-    const savedPhoneNumbers = await getSavedPhoneNumbers();
-    const fullName = await getLocalData('full_name');
-    const fcmToken = await getLocalData('fcmToken');
+
     if (message === null) {
       Toast.show({
         type: 'error',
@@ -110,44 +52,25 @@ export default function DefaultFloatingWidget(props: IDefaultFloatingWidget) {
         return;
       }
 
-      if (phoneNumber) {
-        if (savedPhoneNumbers) {
-          broadcastLocationRequest(
-            message,
-            newLocation.latitude,
-            newLocation.longitude,
-            savedPhoneNumbers,
-            fullName,
-            fcmToken,
-          ).then(res => {
-            if (res.success) {
-              Toast.show({
-                type: 'success',
-                text1: 'Location broadcasted',
-                text2: 'Your location has been broadcasted successfully',
-              });
-            } else {
-              Toast.show({
-                type: 'error',
-                text1: 'Error broadcasting location',
-                text2: 'Please try again',
-              });
-            }
+      broadcastLocationRequest(
+        message,
+        newLocation.latitude,
+        newLocation.longitude,
+      ).then(res => {
+        if (res.success) {
+          Toast.show({
+            type: 'success',
+            text1: 'Location broadcasted',
+            text2: 'Your location has been broadcasted successfully',
           });
         } else {
           Toast.show({
             type: 'error',
-            text1: 'No contacts selected',
-            text2: 'Please select contacts to broadcast',
+            text1: 'Error broadcasting location',
+            text2: 'Please try again',
           });
         }
-      } else {
-        Toast.show({
-          type: 'error',
-          text1: 'No phone number set',
-          text2: 'Please set a phone number to broadcast',
-        });
-      }
+      });
     });
   };
 

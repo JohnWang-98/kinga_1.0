@@ -10,7 +10,6 @@ import { getLocalData } from '@/lib/helpers/localStorage';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
 import CustomText from '@/components/atoms/customText';
-import DefaultSafeAreaView from '@/components/atoms/defaultSaveAreaView/DefaultSafeAreaView';
 
 export default function Controls(props: IControls) {
   const {} = props;
@@ -42,7 +41,7 @@ export default function Controls(props: IControls) {
   };
 
   return (
-    <DefaultSafeAreaView>
+    <View style={styles.container}>
       <ScrollFrame>
         <InnerHeader label="Controls" gobackLabel="Decoy App" />
         <Separator />
@@ -61,7 +60,7 @@ export default function Controls(props: IControls) {
           }))}
         />
       </ScrollFrame>
-    </DefaultSafeAreaView>
+    </View>
   );
 }
 
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#152e42',
   },
   fullScreen: {
-    // ...StyleSheet.absoluteFillObject,
-    // zIndex: 1, // Ensure it renders above the tab bar
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 1, // Ensure it renders above the tab bar
   },
 });

@@ -17,15 +17,12 @@ export default function CustomizeText() {
   } = CustomizeTextLogic();
 
   // Convert messages to options that can be passed to the Options component
-  const options =
-    messages && messages.length > 0
-      ? messages.map((msg: any, index: number) => ({
-          label: msg.message,
-          buttonType: 'option',
-          active: msg.active,
-          onSelected: setSelectedOptionAndUpdate,
-        }))
-      : [];
+  const options = messages.map((msg: any, index: number) => ({
+    label: msg.message,
+    buttonType: 'option',
+    active: msg.active,
+    onSelected: setSelectedOptionAndUpdate,
+  }));
 
   // Add the "Add New Message" option to the end
   const addNewMessageOption = {
@@ -47,7 +44,7 @@ export default function CustomizeText() {
             <ActivityIndicator size={24} color="white" />
           </View>
         ) : error ? (
-          <Options options={options} selectedOption={selectedOption} />
+          <Text>{error}</Text>
         ) : (
           <Options options={options} selectedOption={selectedOption} />
         )}

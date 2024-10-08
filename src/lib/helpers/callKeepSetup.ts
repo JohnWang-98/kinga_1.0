@@ -8,12 +8,13 @@ const options = {
   },
   android: {
     alertTitle: 'Permissions Required',
-    alertDescription: 'This app needs access to your phone accounts',
+    alertDescription:
+      'This app needs access to your phone accounts and notifications',
     cancelButton: 'Cancel',
     okButton: 'OK',
     additionalPermissions: [
       PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS, // Add more permissions here
+      PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS, // Permission for push notifications (Android 13+)
     ],
   },
 };

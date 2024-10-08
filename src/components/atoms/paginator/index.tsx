@@ -43,7 +43,7 @@ export default function Paginator(props: IPaginator) {
           );
         })}
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('TabsHome')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Auth')}>
         <Text className="text-gray-200 font-400 text-base pl-1">Skip</Text>
       </TouchableOpacity>
     </View>
